@@ -1,0 +1,114 @@
+<div class="dashboard" [class.loading]="carregando">
+  <section class="welcome-panel">
+    <div>
+      <p class="section-kicker">Resumo</p>
+      <h2>Olá, bom trabalho.</h2>
+      <span>Veja rapidamente os números principais da biblioteca.</span>
+    </div>
+  </section>
+
+  <div class="skeleton-grid" *ngIf="carregando">
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+  </div>
+
+  <div class="cards-dashboard" *ngIf="!carregando">
+    <div class="dash-card autores-card">
+      <div class="card-info">
+        <span>Autores</span>
+        <p>{{ totalAutores }}</p>
+      </div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21a8 8 0 0 1 16 0"/></svg>
+      </div>
+    </div>
+
+    <div class="dash-card livros-card">
+      <div class="card-info">
+        <span>Livros</span>
+        <p>{{ totalLivros }}</p>
+      </div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v18H7.5A2.5 2.5 0 0 0 5 22V4.5Z"/><path d="M5 18.5A2.5 2.5 0 0 1 7.5 16H20"/></svg>
+      </div>
+    </div>
+
+    <div class="dash-card clientes-card">
+      <div class="card-info">
+        <span>Clientes</span>
+        <p>{{ totalClientes }}</p>
+      </div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM7.5 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2.5 21a5 5 0 0 1 10 0M11.5 21a5.5 5.5 0 0 1 10.5-2.2"/></svg>
+      </div>
+    </div>
+
+    <div class="dash-card locacoes-card">
+      <div class="card-info">
+        <span>Locações</span>
+        <p>{{ totalLocacoes }}</p>
+      </div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4H7zM6 7h12v14H6z"/><path d="M9 11h6M9 15h4"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-strip" *ngIf="!carregando">
+    <div>
+      <span>Locações ativas</span>
+      <strong>{{ locacoesAtivas }}</strong>
+    </div>
+    <div>
+      <span>Livros disponíveis</span>
+      <strong>{{ livrosDisponiveis }}</strong>
+    </div>
+    <div>
+      <span>Locações atrasadas</span>
+      <strong>{{ locacoesAtrasadas }}</strong>
+    </div>
+  </div>
+
+  <div class="ultimos-livros locacoes-home" *ngIf="!carregando && locacoesResumo.length > 0">
+    <div class="titulo-tabela">
+      <div>
+        <p class="section-kicker">Locações</p>
+        <h2>Quem está com cada livro</h2>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Cliente</th>
+            <th>Livro</th>
+            <th>Autor</th>
+            <th>Locação</th>
+            <th>Devolução</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let locacao of locacoesResumo">
+            <td>{{ locacao.codigo }}</td>
+            <td>{{ locacao.cliente }}</td>
+            <td>{{ locacao.livro }}</td>
+            <td>{{ locacao.autor }}</td>
+            <td>{{ formatarData(locacao.dataLocacao) }}</td>
+            <td>{{ formatarData(locacao.dataDevolucao) }}</td>
+            <td>
+              <span class="status-pill" [class.devolvido]="locacao.status == 'Devolvido'" [class.atrasado]="locacao.status == 'Atrasado'">
+                {{ locacao.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

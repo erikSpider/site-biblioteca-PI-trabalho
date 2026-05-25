@@ -1,0 +1,91 @@
+<main class="login-page">
+  <section class="login-visual" aria-label="Apresentação do sistema">
+    <div class="login-brand">
+      <img src="logo-biblioteca.svg" alt="Logo Biblioteca">
+      <div>
+        <strong>Biblioteca Flow</strong>
+        <span>Acervo inteligente</span>
+      </div>
+    </div>
+
+    <div class="hero-copy">
+      <p>Gestão moderna</p>
+      <h1>Organize leitores, livros e locações com uma experiência fluida.</h1>
+      <span>Um painel visual para acompanhar disponibilidade, movimentações e histórico do acervo.</span>
+    </div>
+
+    <div class="hero-device">
+      <img src="login-library.svg" alt="Ilustração de biblioteca digital">
+    </div>
+
+    <div class="login-stats">
+      <div>
+        <strong>24h</strong>
+        <span>controle do acervo</span>
+      </div>
+      <div>
+        <strong>100%</strong>
+        <span>responsivo</span>
+      </div>
+      <div>
+        <strong>UX</strong>
+        <span>foco no uso diário</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="login-panel">
+    <form class="login-card" (ngSubmit)="entrar()" novalidate>
+      <div class="login-card-header">
+        <p>Bem-vindo</p>
+        <h2>Entrar no sistema</h2>
+        <span>Acesse o painel administrativo da biblioteca.</span>
+      </div>
+
+      <label class="field-control" [class.invalid]="usuarioInvalido">
+        <span>Usuário</span>
+        <input
+          type="text"
+          name="usuario"
+          placeholder="biblioteca.admin"
+          autocomplete="username"
+          [(ngModel)]="usuario">
+      </label>
+
+      <label class="field-control password-field" [class.invalid]="senhaInvalida">
+        <span>Senha</span>
+        <div>
+          <input
+            [type]="mostrarSenha ? 'text' : 'password'"
+            name="senha"
+            placeholder="Digite sua senha"
+            autocomplete="current-password"
+            [(ngModel)]="senha">
+          <button type="button" (click)="alternarSenha()" [attr.aria-label]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </label>
+
+      <div class="login-options">
+        <label>
+          <input type="checkbox" name="lembrar" [(ngModel)]="lembrar">
+          <span>Lembrar acesso</span>
+        </label>
+        <button type="button" (click)="entrarDemo()">Usar demo</button>
+      </div>
+
+      <div class="login-error" *ngIf="mensagemErro">
+        {{ mensagemErro }}
+      </div>
+
+      <button class="login-submit" type="submit" [class.loading]="tentandoEntrar">
+        <span *ngIf="!tentandoEntrar">Entrar agora</span>
+        <span *ngIf="tentandoEntrar">Preparando painel...</span>
+      </button>
+    </form>
+  </section>
+</main>

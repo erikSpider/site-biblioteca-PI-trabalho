@@ -1,0 +1,357 @@
+{
+  "autores": [
+    {
+      "id": "1",
+      "codigo": 1,
+      "nome": "Machado de Assis",
+      "dataNascimento": "1839-06-21",
+      "nacionalidade": "Brasileira"
+    },
+    {
+      "id": "2",
+      "codigo": 2,
+      "nome": "Clarice Lispector",
+      "dataNascimento": "1920-12-10",
+      "nacionalidade": "Brasileira"
+    },
+    {
+      "id": "3",
+      "codigo": 3,
+      "nome": "Jorge Amado",
+      "dataNascimento": "1912-08-10",
+      "nacionalidade": "Brasileira"
+    },
+    {
+      "id": "4",
+      "codigo": 4,
+      "nome": "José Saramago",
+      "dataNascimento": "1922-11-16",
+      "nacionalidade": "Portuguesa"
+    },
+    {
+      "id": "5",
+      "codigo": 5,
+      "nome": "George Orwell",
+      "dataNascimento": "1903-06-25",
+      "nacionalidade": "Britânica"
+    },
+    {
+      "id": "6",
+      "codigo": 6,
+      "nome": "J. K. Rowling",
+      "dataNascimento": "1965-07-31",
+      "nacionalidade": "Britânica"
+    },
+    {
+      "id": "7",
+      "codigo": 7,
+      "nome": "Agatha Christie",
+      "dataNascimento": "1890-09-15",
+      "nacionalidade": "Britânica"
+    },
+    {
+      "id": "8",
+      "codigo": 8,
+      "nome": "Gabriel García Márquez",
+      "dataNascimento": "1927-03-06",
+      "nacionalidade": "Colombiana"
+    },
+    {
+      "id": "LgTp1MqNYQE",
+      "codigo": 9,
+      "nome": "Jeff Kinney",
+      "dataNascimento": "1971-02-19",
+      "nacionalidade": "Americano"
+    }
+  ],
+  "livros": [
+    {
+      "id": "1",
+      "codigo": 1,
+      "idAutor": 1,
+      "titulo": "Dom Casmurro",
+      "dataPublicacao": "1899-01-01",
+      "editora": "Garnier",
+      "genero": "Romance"
+    },
+    {
+      "id": "2",
+      "codigo": 2,
+      "idAutor": 1,
+      "titulo": "Memórias Póstumas de Brás Cubas",
+      "dataPublicacao": "1881-01-01",
+      "editora": "Tipografia Nacional",
+      "genero": "Romance"
+    },
+    {
+      "id": "3",
+      "codigo": 3,
+      "idAutor": 2,
+      "titulo": "A Hora da Estrela",
+      "dataPublicacao": "1977-01-01",
+      "editora": "José Olympio",
+      "genero": "Ficção"
+    },
+    {
+      "id": "4",
+      "codigo": 4,
+      "idAutor": 2,
+      "titulo": "Perto do Coração Selvagem",
+      "dataPublicacao": "1943-01-01",
+      "editora": "A Noite",
+      "genero": "Romance"
+    },
+    {
+      "id": "5",
+      "codigo": 5,
+      "idAutor": 3,
+      "titulo": "Capitães da Areia",
+      "dataPublicacao": "1937-01-01",
+      "editora": "José Olympio",
+      "genero": "Romance social"
+    },
+    {
+      "id": "6",
+      "codigo": 6,
+      "idAutor": 3,
+      "titulo": "Gabriela, Cravo e Canela",
+      "dataPublicacao": "1958-01-01",
+      "editora": "Martins",
+      "genero": "Romance"
+    },
+    {
+      "id": "7",
+      "codigo": 7,
+      "idAutor": 4,
+      "titulo": "Ensaio sobre a Cegueira",
+      "dataPublicacao": "1995-01-01",
+      "editora": "Caminho",
+      "genero": "Ficção"
+    },
+    {
+      "id": "8",
+      "codigo": 8,
+      "idAutor": 4,
+      "titulo": "O Evangelho Segundo Jesus Cristo",
+      "dataPublicacao": "1991-01-01",
+      "editora": "Caminho",
+      "genero": "Romance"
+    },
+    {
+      "id": "9",
+      "codigo": 9,
+      "idAutor": 5,
+      "titulo": "1984",
+      "dataPublicacao": "1949-06-08",
+      "editora": "Secker & Warburg",
+      "genero": "Distopia"
+    },
+    {
+      "id": "10",
+      "codigo": 10,
+      "idAutor": 5,
+      "titulo": "A Revolução dos Bichos",
+      "dataPublicacao": "1945-08-17",
+      "editora": "Secker & Warburg",
+      "genero": "Sátira política"
+    },
+    {
+      "id": "11",
+      "codigo": 11,
+      "idAutor": 6,
+      "titulo": "Harry Potter e a Pedra Filosofal",
+      "dataPublicacao": "1997-06-26",
+      "editora": "Bloomsbury",
+      "genero": "Fantasia"
+    },
+    {
+      "id": "12",
+      "codigo": 12,
+      "idAutor": 6,
+      "titulo": "Harry Potter e a Câmara Secreta",
+      "dataPublicacao": "1998-07-02",
+      "editora": "Bloomsbury",
+      "genero": "Fantasia"
+    },
+    {
+      "id": "13",
+      "codigo": 13,
+      "idAutor": 7,
+      "titulo": "Assassinato no Expresso do Oriente",
+      "dataPublicacao": "1934-01-01",
+      "editora": "Collins Crime Club",
+      "genero": "Mistério"
+    },
+    {
+      "id": "14",
+      "codigo": 14,
+      "idAutor": 7,
+      "titulo": "E Não Sobrou Nenhum",
+      "dataPublicacao": "1939-11-06",
+      "editora": "Collins Crime Club",
+      "genero": "Mistério"
+    },
+    {
+      "id": "15",
+      "codigo": 15,
+      "idAutor": 8,
+      "titulo": "Cem Anos de Solidão",
+      "dataPublicacao": "1967-05-30",
+      "editora": "Sudamericana",
+      "genero": "Realismo mágico"
+    },
+    {
+      "id": "16",
+      "codigo": 16,
+      "idAutor": 8,
+      "titulo": "O Amor nos Tempos do Cólera",
+      "dataPublicacao": "1985-01-01",
+      "editora": "Oveja Negra",
+      "genero": "Romance"
+    },
+    {
+      "id": "goWJd6ytRnM",
+      "codigo": 17,
+      "idAutor": "7",
+      "titulo": "Dom Casmurro",
+      "dataPublicacao": "3546-04-12",
+      "editora": "Exu",
+      "genero": "terror"
+    },
+    {
+      "id": "hYiX5jnFv_U",
+      "codigo": 18,
+      "idAutor": "LgTp1MqNYQE",
+      "titulo": "Diario de um banana",
+      "dataPublicacao": "2007-04-01",
+      "editora": "Amulet Books (Open Library)",
+      "genero": "Comédia"
+    }
+  ],
+  "clientes": [
+    {
+      "id": "1",
+      "codigo": 1,
+      "nome": "Mariana Souza",
+      "email": "mariana.souza@email.com",
+      "telefone": "(11) 99999-1234",
+      "endereco": "Rua das Flores, 120"
+    },
+    {
+      "id": "2",
+      "codigo": 2,
+      "nome": "João Pereira",
+      "email": "joao.pereira@email.com",
+      "telefone": "(21) 98888-4321",
+      "endereco": "Avenida Central, 45"
+    },
+    {
+      "id": "3",
+      "codigo": 3,
+      "nome": "Ana Clara Lima",
+      "email": "ana.lima@email.com",
+      "telefone": "(31) 97777-2468",
+      "endereco": "Rua Minas Gerais, 89"
+    },
+    {
+      "id": "4",
+      "codigo": 4,
+      "nome": "Carlos Henrique Martins",
+      "email": "carlos.martins@email.com",
+      "telefone": "(41) 96666-1357",
+      "endereco": "Travessa das Palmeiras, 302"
+    },
+    {
+      "id": "W-Qa09vwRG4",
+      "codigo": 5,
+      "nome": "Erik Davi",
+      "email": "erikdavi990@gmail.com",
+      "telefone": "(11) 95278-7978",
+      "endereco": "R. Fernão Dias, 640"
+    }
+  ],
+  "locacoes": [
+    {
+      "id": "1",
+      "codigo": 1,
+      "idCliente": 1,
+      "idLivro": 1,
+      "dataLocacao": "2026-05-10",
+      "dataDevolucao": "2026-06-01",
+      "status": "Devolvido"
+    },
+    {
+      "id": "2",
+      "codigo": 2,
+      "idCliente": 2,
+      "idLivro": 4,
+      "dataLocacao": "2026-04-22",
+      "dataDevolucao": "2026-05-10",
+      "status": "Devolvido"
+    },
+    {
+      "id": "3",
+      "codigo": 3,
+      "idCliente": 3,
+      "idLivro": 9,
+      "dataLocacao": "2026-05-15",
+      "dataDevolucao": "2026-05-30",
+      "status": "Devolvido"
+    },
+    {
+      "id": "4",
+      "codigo": 4,
+      "idCliente": 4,
+      "idLivro": 12,
+      "dataLocacao": "2026-04-01",
+      "dataDevolucao": "2026-04-18",
+      "status": "Devolvido"
+    },
+    {
+      "id": "5",
+      "codigo": 5,
+      "idCliente": 1,
+      "idLivro": 14,
+      "dataLocacao": "2026-05-18",
+      "dataDevolucao": "2026-06-05",
+      "status": "Em andamento"
+    },
+    {
+      "id": "6",
+      "codigo": 6,
+      "idCliente": 4,
+      "idLivro": 6,
+      "dataLocacao": "2026-04-12",
+      "dataDevolucao": "2026-04-30",
+      "status": "Devolvido"
+    },
+    {
+      "id": "7",
+      "codigo": 7,
+      "idCliente": 2,
+      "idLivro": 15,
+      "dataLocacao": "2026-03-05",
+      "dataDevolucao": "2026-03-25",
+      "status": "Devolvido"
+    },
+    {
+      "id": "8",
+      "codigo": 8,
+      "idCliente": 3,
+      "idLivro": 7,
+      "dataLocacao": "2026-05-20",
+      "dataDevolucao": "2026-06-08",
+      "status": "Em andamento"
+    },
+    {
+      "id": "gUJkZdt7Vpk",
+      "codigo": 9,
+      "idCliente": "W-Qa09vwRG4",
+      "idLivro": "hYiX5jnFv_U",
+      "dataLocacao": "2025-05-25",
+      "dataDevolucao": "2025-06-24",
+      "status": "Atrasado"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

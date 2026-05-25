@@ -1,0 +1,252 @@
+<div class="container mt-5">
+  <section class="module-hero">
+    <div>
+      <p>Operação</p>
+      <h2>Alocações em linha do tempo</h2>
+      <span>Acompanhe empréstimos, atrasos e devoluções com indicadores visuais e navegação fluida.</span>
+    </div>
+    <div class="module-visual">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4H7zM6 7h12v14H6z"/><path d="M9 11h6M9 15h4"/></svg>
+    </div>
+  </section>
+
+  <div class="card">
+    <div class="sucesso-form" *ngIf="mensagemSucesso">
+      {{ mensagemSucesso }}
+    </div>
+
+    <div *ngIf="modo == 'cadastrar' || editando || mostrandoFormulario">
+
+      <div class="panel-heading">
+        <div>
+          <p>Locações</p>
+          <h2>{{ editando ? 'Editar locação' : 'Cadastro de locações' }}</h2>
+        </div>
+        <button type="button" class="btn btn-light" *ngIf="modo == 'gerenciar'" (click)="cancelarFormulario()">
+          Cancelar
+        </button>
+      </div>
+
+      <form>
+        <div class="erro-form" *ngIf="mensagemErro">
+          {{ mensagemErro }}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Cliente</label>
+          <select
+            class="form-select"
+            [(ngModel)]="locacao.idCliente"
+            name="idCliente">
+            <option [ngValue]="0">Selecione um cliente</option>
+            <option
+              *ngFor="let cliente of clientes"
+              [ngValue]="cliente.id">
+              {{cliente.nome}}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Livro</label>
+          <select
+            class="form-select"
+            [(ngModel)]="locacao.idLivro"
+            name="idLivro">
+            <option [ngValue]="0">Selecione um livro</option>
+            <option
+              *ngFor="let livro of livros"
+              [ngValue]="livro.id"
+              [disabled]="!livroDisponivel(livro.id, editando ? locacao.id : 0)">
+              {{livro.titulo}} {{ livroDisponivel(livro.id, editando ? locacao.id : 0) ? '' : '- indisponível' }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Data da locação</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="locacao.dataLocacao"
+            name="dataLocacao">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Previsão de devolução</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="locacao.dataDevolucao"
+            name="dataDevolucao">
+        </div>
+
+        <div class="form-actions">
+          <button
+            *ngIf="!editando"
+            type="button"
+            class="btn btn-primary"
+            (click)="salvar()">
+            Salvar locação
+          </button>
+
+          <button
+            *ngIf="editando"
+            type="button"
+            class="btn btn-success"
+            (click)="atualizar()">
+            Atualizar locação
+          </button>
+
+          <button type="button" class="btn btn-light" *ngIf="modo == 'gerenciar'" (click)="cancelarFormulario()">
+            Voltar
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div *ngIf="(modo == 'consultar' || modo == 'gerenciar') && !editando && !mostrandoFormulario">
+
+      <div class="panel-heading">
+        <div>
+          <p>Locações</p>
+          <h2>Locações cadastradas</h2>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="novo()">
+          Nova locação
+        </button>
+      </div>
+
+      <div class="filters-row">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Pesquisar por cliente, livro, status ou código..."
+          [(ngModel)]="pesquisa"
+          (input)="consultar()">
+
+        <select
+          class="form-select status-filter"
+          [(ngModel)]="filtroStatus"
+          (change)="consultar()">
+          <option value="Todos">Todos</option>
+          <option value="Em andamento">Em andamento</option>
+          <option value="Atrasado">Atrasado</option>
+          <option value="Devolvido">Devolvido</option>
+        </select>
+
+        <button type="button" class="btn btn-light" (click)="limparPesquisa()">
+          Limpar
+        </button>
+      </div>
+
+      <div class="summary-row">
+        <div>
+          <span>Total filtrado</span>
+          <strong>{{ totalFiltrado() }}</strong>
+        </div>
+        <div>
+          <span>Em andamento</span>
+          <strong>{{ totalPorStatus('Em andamento') }}</strong>
+        </div>
+        <div>
+          <span>Atrasadas</span>
+          <strong>{{ totalPorStatus('Atrasado') }}</strong>
+        </div>
+        <div>
+          <span>Devolvidas</span>
+          <strong>{{ totalPorStatus('Devolvido') }}</strong>
+        </div>
+      </div>
+
+      <div class="timeline-preview" *ngIf="locacoesFiltradas.length > 0">
+        <div class="timeline-item" *ngFor="let l of locacoesFiltradas | slice:0:4">
+          <span class="allocation-thumb"></span>
+          <span class="timeline-dot"></span>
+          <div>
+            <strong>{{ buscarLivro(l.idLivro) }}</strong>
+            <span>{{ buscarCliente(l.idCliente) }} • {{ formatarData(l.dataLocacao) }}</span>
+          </div>
+          <span class="status-pill" [class.devolvido]="calcularStatus(l) == 'Devolvido'" [class.atrasado]="calcularStatus(l) == 'Atrasado'">
+            {{ calcularStatus(l) }}
+          </span>
+        </div>
+      </div>
+
+      <table class="table table-hover table-bordered align-middle">
+
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Cliente</th>
+            <th>Livro</th>
+            <th>Locação</th>
+            <th>Devolucao</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let l of locacoesFiltradas" [class.linha-atrasada]="calcularStatus(l) == 'Atrasado'">
+            <td>{{l.codigo}}</td>
+            <td>{{buscarCliente(l.idCliente)}}</td>
+            <td>{{buscarLivro(l.idLivro)}}</td>
+            <td>{{formatarData(l.dataLocacao)}}</td>
+            <td>{{formatarData(l.dataDevolucao)}}</td>
+            <td>
+              <span class="status-pill" [class.devolvido]="calcularStatus(l) == 'Devolvido'" [class.atrasado]="calcularStatus(l) == 'Atrasado'">
+                {{calcularStatus(l)}}
+              </span>
+            </td>
+            <td>
+              <button
+                class="btn btn-success btn-sm me-2"
+                *ngIf="calcularStatus(l) != 'Devolvido'"
+                (click)="devolver(l)">
+                Devolver
+              </button>
+              <button class="btn btn-warning btn-sm me-2" (click)="editar(l)">
+                Editar
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="abrirConfirmacaoExclusao(l)">
+                Excluir
+              </button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal-overlay" *ngIf="locacaoParaExcluir">
+  <div class="confirm-modal">
+    <div class="modal-icon">!</div>
+
+    <div class="modal-content-text">
+      <p class="modal-kicker">Confirmar exclusão</p>
+      <h3>Excluir locação?</h3>
+      <span>
+        A locação de <strong>{{ buscarLivro(locacaoParaExcluir.idLivro) }}</strong>
+        para <strong>{{ buscarCliente(locacaoParaExcluir.idCliente) }}</strong> será removida.
+        Essa ação não pode ser desfeita.
+      </span>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-light" (click)="cancelarExclusao()">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">
+        Sim, excluir
+      </button>
+    </div>
+  </div>
+</div>

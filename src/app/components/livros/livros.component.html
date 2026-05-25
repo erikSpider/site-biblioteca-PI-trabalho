@@ -1,0 +1,217 @@
+<div class="container mt-5">
+  <section class="module-hero">
+    <div>
+      <p>Vitrine do acervo</p>
+      <h2>Livros com visual de catálogo premium</h2>
+      <span>Pesquise, cadastre e acompanhe disponibilidade em uma experiência inspirada em produtos digitais modernos.</span>
+    </div>
+    <div class="module-visual">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v18H7.5A2.5 2.5 0 0 0 5 22V4.5Z"/><path d="M5 18.5A2.5 2.5 0 0 1 7.5 16H20"/></svg>
+    </div>
+  </section>
+
+  <div class="card">
+    <div class="sucesso-form" *ngIf="mensagemSucesso">
+      {{ mensagemSucesso }}
+    </div>
+    <div class="erro-form" *ngIf="mensagemErro && !mostrandoFormulario">
+      {{ mensagemErro }}
+    </div>
+
+    <div *ngIf="modo == 'cadastrar' || editando || mostrandoFormulario">
+
+      <div class="panel-heading">
+        <div>
+          <p>Livros</p>
+          <h2>{{ editando ? 'Editar livro' : 'Cadastro de livros' }}</h2>
+        </div>
+        <button type="button" class="btn btn-light" *ngIf="modo == 'gerenciar'" (click)="cancelarFormulario()">
+          Cancelar
+        </button>
+      </div>
+
+      <form>
+        <div class="erro-form" *ngIf="mensagemErro">
+          {{ mensagemErro }}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Título</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ex: Dom Casmurro"
+            [(ngModel)]="livro.titulo"
+            name="titulo">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Data de publicação</label>
+          <input
+            type="date"
+            class="form-control"
+            [(ngModel)]="livro.dataPublicacao"
+            name="dataPublicacao">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Editora</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ex: Companhia das Letras"
+            [(ngModel)]="livro.editora"
+            name="editora">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Gênero</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ex: Romance"
+            [(ngModel)]="livro.genero"
+            name="genero">
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Autor</label>
+          <select
+            class="form-select"
+            [(ngModel)]="livro.idAutor"
+            name="idAutor">
+            <option [ngValue]="0">Selecione um autor</option>
+            <option
+              *ngFor="let autor of autores"
+              [ngValue]="autor.id">
+              {{autor.nome}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button
+            *ngIf="!editando"
+            type="button"
+            class="btn btn-primary"
+            (click)="salvar()">
+            Salvar livro
+          </button>
+
+          <button
+            *ngIf="editando"
+            type="button"
+            class="btn btn-success"
+            (click)="atualizar()">
+            Atualizar livro
+          </button>
+
+          <button type="button" class="btn btn-light" *ngIf="modo == 'gerenciar'" (click)="cancelarFormulario()">
+            Voltar
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div *ngIf="(modo == 'consultar' || modo == 'gerenciar') && !editando && !mostrandoFormulario">
+
+      <div class="panel-heading">
+        <div>
+          <p>Livros</p>
+          <h2>Livros cadastrados</h2>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="novo()">
+          Novo livro
+        </button>
+      </div>
+
+      <div class="search-box">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Pesquisar por título ou código..."
+          [(ngModel)]="pesquisa"
+          (input)="consultar()">
+      </div>
+
+      <div class="visual-grid" *ngIf="livrosFiltrados.length > 0">
+        <div class="book-card" *ngFor="let l of livrosFiltrados | slice:0:4">
+          <div class="book-cover"></div>
+          <strong>{{ l.titulo }}</strong>
+          <span>{{ buscarAutor(l.idAutor) || 'Autor não informado' }}</span>
+          <span>{{ l.genero }} • {{ statusLivro(l.id) }}</span>
+        </div>
+      </div>
+
+      <table class="table table-hover table-bordered align-middle">
+
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Data</th>
+            <th>Editora</th>
+            <th>Gênero</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let l of livrosFiltrados">
+            <td>{{l.codigo}}</td>
+            <td>{{l.titulo}}</td>
+            <td>{{buscarAutor(l.idAutor)}}</td>
+            <td>{{formatarData(l.dataPublicacao)}}</td>
+            <td>{{l.editora}}</td>
+            <td>{{l.genero}}</td>
+            <td>
+              <span class="status-pill" [class.devolvido]="statusLivro(l.id) == 'Disponível'" [class.atrasado]="statusLivro(l.id) == 'Atrasado'">
+                {{statusLivro(l.id)}}
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2" (click)="editar(l)">
+                Editar
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="abrirConfirmacaoExclusao(l)">
+                Excluir
+              </button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal-overlay" *ngIf="livroParaExcluir">
+  <div class="confirm-modal">
+    <div class="modal-icon">!</div>
+
+    <div class="modal-content-text">
+      <p class="modal-kicker">Confirmar exclusão</p>
+      <h3>Excluir livro?</h3>
+      <span>
+        O livro <strong>{{ livroParaExcluir.titulo }}</strong> será removido do acervo.
+        Essa ação não pode ser desfeita.
+      </span>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn btn-light" (click)="cancelarExclusao()">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">
+        Sim, excluir
+      </button>
+    </div>
+  </div>
+</div>

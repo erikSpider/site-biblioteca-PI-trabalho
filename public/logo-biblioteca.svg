@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Biblioteca</title>
+  <desc id="desc">Livro aberto com marcador de pagina</desc>
+  <rect width="96" height="96" rx="20" fill="#1f3a3d"/>
+  <path d="M18 25c0-4.4 3.6-8 8-8h17c5.2 0 9.7 2.2 13 5.7C59.3 19.2 63.8 17 69 17h1c4.4 0 8 3.6 8 8v47c0 3.3-2.7 6-6 6H61c-5.2 0-9.8 2-13 5.3C44.8 80 40.2 78 35 78H24c-3.3 0-6-2.7-6-6V25Z" fill="#f7efe1"/>
+  <path d="M48 27c-2.3-2.7-5.9-4.2-10-4.2H26c-1.7 0-3 1.3-3 3v43.4c0 1.2 1 2.2 2.2 2.2H36c4.6 0 8.8 1.4 12 4V27Z" fill="#fffaf0"/>
+  <path d="M53 27c2.3-2.7 5.9-4.2 10-4.2h7c1.7 0 3 1.3 3 3v43.4c0 1.2-1 2.2-2.2 2.2H60c-2.5 0-4.8.4-7 1.3V27Z" fill="#efe2c8"/>
+  <path d="M57 21.6v28.7l6.4-4.7 6.4 4.7V18.4H63c-2.2 0-4.3.5-6 1.5v1.7Z" fill="#c77d42"/>
+  <path d="M30 36h11M30 47h11M30 58h9" stroke="#1f3a3d" stroke-width="4" stroke-linecap="round"/>
+  <path d="M57 57h9" stroke="#1f3a3d" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+</svg>

@@ -1,0 +1,92 @@
+.filters-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 190px auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.status-filter {
+  min-width: 180px;
+}
+
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.summary-row div {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 8px;
+  padding: 14px 16px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72)),
+    linear-gradient(120deg, rgba(109, 93, 252, 0.12), transparent);
+  box-shadow: 0 14px 34px rgba(2, 6, 23, 0.1);
+  animation: summaryIn 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.summary-row div:nth-child(2) {
+  animation-delay: 0.04s;
+}
+
+.summary-row div:nth-child(3) {
+  animation-delay: 0.08s;
+}
+
+.summary-row div:nth-child(4) {
+  animation-delay: 0.12s;
+}
+
+.summary-row span {
+  display: block;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.summary-row strong {
+  display: block;
+  margin-top: 5px;
+  color: #111827;
+  font-size: 26px;
+  font-weight: 950;
+}
+
+.linha-atrasada > td {
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.linha-atrasada:hover > td {
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+@keyframes summaryIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 960px) {
+  .filters-row {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .summary-row {
+    grid-template-columns: 1fr;
+  }
+}

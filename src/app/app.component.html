@@ -1,0 +1,119 @@
+<app-login *ngIf="!autenticado" (loginSucesso)="entrar($event)"></app-login>
+
+<div class="app-shell" *ngIf="autenticado">
+  <header class="main-navbar" [class.menu-open]="menuMobileAberto">
+    <button class="nav-brand" type="button" (click)="navegar('home')" aria-label="Ir para Home">
+      <img src="logo-biblioteca.svg" alt="Logo Biblioteca">
+      <span>
+        <strong>Biblioteca Flow</strong>
+        <small>SaaS de acervo</small>
+      </span>
+    </button>
+
+    <nav class="nav-links" aria-label="Navegação principal">
+      <button
+        *ngFor="let item of navItems"
+        type="button"
+        class="nav-link"
+        [class.active]="tela == item.id"
+        (click)="navegar(item.id)">
+        <span class="nav-icon" [ngClass]="item.icon">
+          <svg *ngIf="item.icon == 'home'" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-8.5Z"/></svg>
+          <svg *ngIf="item.icon == 'book'" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v18H7.5A2.5 2.5 0 0 0 5 22V4.5Z"/><path d="M5 18.5A2.5 2.5 0 0 1 7.5 16H20"/></svg>
+          <svg *ngIf="item.icon == 'users'" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM7.5 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2.5 21a5 5 0 0 1 10 0M11.5 21a5.5 5.5 0 0 1 10.5-2.2"/></svg>
+          <svg *ngIf="item.icon == 'author'" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21a8 8 0 0 1 16 0"/></svg>
+          <svg *ngIf="item.icon == 'allocation'" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4H7zM6 7h12v14H6z"/><path d="M9 11h6M9 15h4"/></svg>
+        </span>
+        {{ item.label }}
+      </button>
+    </nav>
+
+    <div class="navbar-actions">
+      <div class="nav-search" [class.active]="buscaAberta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.3-4.3M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
+        <input
+          type="search"
+          name="buscaGlobal"
+          [placeholder]="placeholderBusca"
+          autocomplete="off"
+          [(ngModel)]="termoBusca"
+          (input)="pesquisar()"
+          (focus)="pesquisar()">
+        <button type="button" *ngIf="termoBusca" (click)="limparBusca()" aria-label="Limpar busca">×</button>
+
+        <div class="search-results" *ngIf="buscaAberta && tela == 'home'">
+          <button
+            type="button"
+            class="search-result"
+            *ngFor="let resultado of resultadosBusca"
+            (click)="abrirResultado(resultado)">
+            <span>{{ resultado.tipo }}</span>
+            <strong>{{ resultado.titulo }}</strong>
+            <small>{{ resultado.detalhe }}</small>
+          </button>
+
+          <div class="search-empty" *ngIf="resultadosBusca.length == 0">
+            Nenhum resultado encontrado.
+          </div>
+        </div>
+      </div>
+
+      <div class="user-chip">
+        <span>{{ usuarioLogado.charAt(0).toUpperCase() }}</span>
+        <div>
+          <strong>{{ usuarioLogado }}</strong>
+          <small>Administrador</small>
+        </div>
+      </div>
+
+      <button class="logout-button" type="button" (click)="sair()">Sair</button>
+
+      <button class="mobile-toggle" type="button" (click)="alternarMenuMobile()" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="app-hero" *ngIf="tela != 'home'">
+      <div>
+        <p class="page-kicker">Sistema administrativo</p>
+        <h1>{{ tituloPagina }}</h1>
+        <span>{{ subtituloPagina }}</span>
+      </div>
+      <div class="hero-orbit">
+        <img src="logo-biblioteca.svg" alt="Marca Biblioteca Flow">
+      </div>
+    </section>
+
+    <div class="page-loader" *ngIf="carregandoPagina">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <section class="page-shell" [class.is-loading]="carregandoPagina">
+      <app-home *ngIf="tela == 'home'"></app-home>
+      <app-livros *ngIf="tela == 'livros'" modo="gerenciar" [pesquisaGlobal]="termoBusca"></app-livros>
+      <app-clientes
+        *ngIf="tela == 'clientes'"
+        modo="gerenciar"
+        [pesquisaGlobal]="termoBusca"
+        [abrirLocacoesCliente]="abrirLocacoesDoCliente.bind(this)">
+      </app-clientes>
+      <app-autores *ngIf="tela == 'autores'" modo="gerenciar" [pesquisaGlobal]="termoBusca"></app-autores>
+      <app-locacoes
+        *ngIf="tela == 'locacoes'"
+        modo="gerenciar"
+        [pesquisaGlobal]="termoBusca"
+        [clienteFiltroId]="clienteFiltroLocacoes">
+      </app-locacoes>
+    </section>
+
+    <footer class="app-footer">
+      Sistema de Biblioteca - Projeto Integrador | Feito por Matheus Goulart e Erik Davi
+    </footer>
+  </main>
+</div>

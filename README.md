@@ -1,59 +1,83 @@
-# BibliotecaCrud
+# 📚 Biblioteca Flow
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.26.
+Sistema web de gerenciamento de biblioteca, desenvolvido como Projeto Integrador. Permite cadastrar e consultar **autores**, **livros**, **clientes** e **alocações (locações)**, com um painel inicial (dashboard) e busca global.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-19-DD0031?logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)
+![json-server](https://img.shields.io/badge/json--server-0.17-black)
 
-To start a local development server, run:
+## 📸 Demonstração
 
-```bash
-ng serve
-```
+<!-- Adicione prints em docs/screenshots/ e troque os caminhos abaixo -->
+![Login](docs/screenshots/login.png)
+![Dashboard](docs/screenshots/dashboard.png)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## ✨ Funcionalidades
 
-## Code scaffolding
+- [x] Tela de login (simulada, apenas para demonstração)
+- [x] Dashboard com visão geral do acervo
+- [x] CRUD de autores, livros, clientes e alocações
+- [x] Busca global entre as entidades
+- [x] Layout responsivo com menu mobile
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🧱 Tecnologias
 
-```bash
-ng generate component component-name
-```
+- **Front-end:** Angular 19 (componentes standalone), TypeScript, Bootstrap 5, RxJS
+- **API fake:** json-server (dados em `backend/db.json`)
+- **Testes:** Karma + Jasmine
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## ▶️ Como rodar localmente
 
-```bash
-ng generate --help
-```
+### Pré-requisitos
 
-## Building
+- [Node.js](https://nodejs.org/) 18 ou superior
+- npm
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Passo a passo
 
 ```bash
-ng test
+# 1. Clonar o repositório
+git clone https://github.com/erikSpider/site-biblioteca-PI-vis.git
+cd site-biblioteca-PI-vis
+
+# 2. Instalar as dependências
+npm install
+
+# 3. Subir a API fake (terminal 1) - porta 3000
+npx json-server --watch backend/db.json --port 3000
+
+# 4. Subir o front-end (terminal 2) - porta 4200
+npm start
 ```
 
-## Running end-to-end tests
+Acesse **http://localhost:4200**.
 
-For end-to-end (e2e) testing, run:
+> A tela de login é simulada. Use o botão de acesso demo ou qualquer usuário com 3+ caracteres e senha com 4+ caracteres.
+
+## 🗂️ Estrutura
+
+```
+src/app/
+├── components/   # home, login, autores, livros, clientes, locacoes
+├── models/       # interfaces (Autor, Livro, Cliente, Locacao)
+└── services/     # acesso à API (HttpClient)
+backend/db.json   # dados de exemplo da API
+```
+
+## 🧪 Testes
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🗺️ Próximos passos
 
-## Additional Resources
+- [ ] Trocar o json-server por uma API real (Java + Spring Boot + banco de dados)
+- [ ] Autenticação de verdade (JWT)
+- [ ] Roteamento com Angular Router
+- [ ] Deploy
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 👤 Autor
+
+**Erik Davi** · [GitHub](https://github.com/erikSpider) · [LinkedIn](https://www.linkedin.com/in/erik-davi-111127235)

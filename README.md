@@ -22,6 +22,8 @@ Sistema web de gerenciamento de biblioteca, desenvolvido como Projeto Integrador
 - **API fake:** json-server (dados em `backend/db.json`)
 - **Testes:** Karma + Jasmine
 
+-       [![CI](https://github.com/erikSpider/site-biblioteca-PI-trabalho/actions/workflows/ci.yml/badge.svg)](https://github.com/erikSpider/site-biblioteca-PI-trabalho/actions/workflows/ci.yml)
+
 ## ▶️ Como rodar localmente
 
 ### Pré-requisitos

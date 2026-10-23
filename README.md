@@ -21,8 +21,9 @@ Sistema web de gerenciamento de biblioteca, desenvolvido como Projeto Integrador
 - **Front-end:** Angular 19 (componentes standalone), TypeScript, Bootstrap 5, RxJS
 - **API fake:** json-server (dados em `backend/db.json`)
 - **Testes:** Karma + Jasmine
+- Testes: Karma + Jasmine
 
--       [![CI](https://github.com/erikSpider/site-biblioteca-PI-trabalho/actions/workflows/ci.yml/badge.svg)](https://github.com/erikSpider/site-biblioteca-PI-trabalho/actions/workflows/ci.yml)
+[![CI](https://github.com/erikSpider/site-biblioteca-PI-trabalho/actions/workflows/ci.yml/badge.svg)](https://github.com/erikSpider/site-biblioteca-PI-trabalho/actions)
 
 ## ▶️ Como rodar localmente
 

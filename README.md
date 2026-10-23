@@ -33,8 +33,8 @@ Sistema web de gerenciamento de biblioteca, desenvolvido como Projeto Integrador
 
 ```bash
 # 1. Clonar o repositório
-git clone https://github.com/erikSpider/site-biblioteca-PI-vis.git
-cd site-biblioteca-PI-vis
+git clone https://github.com/erikSpider/site-biblioteca-PI-trabalho.git
+cd site-biblioteca-PI-trabalho
 
 # 2. Instalar as dependências
 npm install

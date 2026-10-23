@@ -7,11 +7,6 @@ Sistema web de gerenciamento de biblioteca, desenvolvido como Projeto Integrador
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)
 ![json-server](https://img.shields.io/badge/json--server-0.17-black)
 
-## 📸 Demonstração
-
-<!-- Adicione prints em docs/screenshots/ e troque os caminhos abaixo -->
-![Login](docs/screenshots/login.png)
-![Dashboard](docs/screenshots/dashboard.png)
 
 ## ✨ Funcionalidades
 
